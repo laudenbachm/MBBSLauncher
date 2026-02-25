@@ -9,6 +9,24 @@ The format for change tracking: `YY.MM.DD.X - HH:MMAM/PM`
 - X = Change number for that day (starts at 1, increments with each change)
 - HH:MM = Time in 12-hour format with AM/PM
 
+## [v1.70] - 2026-02-24
+
+### 26.02.24.1
+**Executable Renamed to MBBSLauncher.exe**
+
+#### Changed
+- **Output executable renamed from `MBBS Launcher.exe` to `MBBSLauncher.exe`**
+  - GitHub's release asset API converts spaces to dots, resulting in `MBBS.Launcher.exe` on downloads
+  - Users updating from earlier versions would end up with both `MBBS Launcher.exe` and `MBBS.Launcher.exe` with no clear indicator which was current
+  - Removing the space eliminates the ambiguity — `MBBSLauncher.exe` downloads and stays exactly as named
+  - The app display name ("MBBS Launcher"), window title, and INI filename (`MBBSLauncher.ini`) are unchanged
+  - Windows startup registry entry key name ("MBBS Launcher") is unchanged
+
+#### Technical Details
+- `MBBSLauncher.csproj`: `<AssemblyName>MBBS Launcher</AssemblyName>` → `<AssemblyName>MBBSLauncher</AssemblyName>`
+
+---
+
 ## [v1.70] - 2026-02-19
 
 ### 26.02.19.8

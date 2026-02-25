@@ -6,7 +6,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <Nullable>enable</Nullable>
     <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
-    <AssemblyName>MBBS Launcher</AssemblyName>
+    <AssemblyName>MBBSLauncher</AssemblyName>
     <RootNamespace>MBBSLauncher</RootNamespace>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
 

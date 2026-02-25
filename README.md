@@ -1,6 +1,6 @@
 # MBBS Launcher
 
-**Version:** v1.55
+**Version:** v1.70
 
 ## Screenshot
 
@@ -70,11 +70,13 @@ Even though the single file is larger, you're actually using **less disk space o
 ## Installation
 
 1. Download the latest release from the [Releases](https://github.com/laudenbachm/MBBS-Launcher/releases) page
-2. Extract to a folder of your choice
-3. Run `MBBS Launcher.exe`
+2. Place `MBBSLauncher.exe` in your BBS directory (or any folder of your choice)
+3. Run `MBBSLauncher.exe`
 4. Click **Yes** when Windows asks for administrator permission (UAC prompt)
 
 **That's it!** No .NET runtime installation needed. All dependencies are included in the single executable.
+
+> **Upgrading from v1.60 or earlier?** The executable was renamed from `MBBS Launcher.exe` to `MBBSLauncher.exe` in v1.70. You can delete the old file — your `MBBSLauncher.ini` settings are fully preserved.
 
 ### Why Administrator Privileges?
 
@@ -105,7 +107,7 @@ Some antivirus software may flag MBBS Launcher as suspicious due to legitimate b
 2. Go to **Virus & threat protection** → **Manage settings**
 3. Scroll down to **Exclusions** → Click **Add or remove exclusions**
 4. Click **Add an exclusion** → **Folder**
-5. Browse to and select the folder containing `MBBS Launcher.exe`
+5. Browse to and select the folder containing `MBBSLauncher.exe`
 6. Click **Select Folder**
 
 **Note:** This is safe to do because the application is open source and has been verified clean (VirusTotal: 2/70 detection rate, no major AV vendors flagged it).
@@ -114,7 +116,7 @@ Some antivirus software may flag MBBS Launcher as suspicious due to legitimate b
 
 1. **Review the source code** - All code is available in this repository
 2. **Scan on VirusTotal** - Check the analysis: https://www.virustotal.com/gui/file/df63ec5c68374a8fcd753466d985d756072d0c9bb04542e7ce918a8f7fa30994
-3. **Add an exception** - Add `MBBS Launcher.exe` to your antivirus exclusions
+3. **Add an exception** - Add `MBBSLauncher.exe` to your antivirus exclusions
 4. **Report as false positive** - Help us by reporting it to your AV vendor
 
 For more information, see our [Security Policy](https://github.com/laudenbachm/MBBS-Launcher/security/policy).
@@ -240,10 +242,10 @@ You can edit this file manually or use the built-in configuration editor (F12).
 
 See [CHANGELOG.md](CHANGELOG.md) for detailed version history.
 
-### Current Version: v1.55
-- **App Manager (Beta)** - Floating status window showing live state of BBS and all auto-launch programs, with manual launch/stop controls
-- **Run as Administrator** - Launcher now requires administrator privileges for reliable process management on Windows 10/11
-- **Auto Launch duplicate detection** - Skips launching if a configured program is already running, preventing duplicate instances
+### Current Version: v1.70
+- **App Manager** - Resizable floating status window with opacity slider, DPI-aware layout, and live countdown display
+- **MBBSLauncher.exe** - Executable renamed from `MBBS Launcher.exe` to avoid GitHub's space→dot conversion on release downloads
+- **Bug fixes** - Paint crash on close, BBS stop showing as "Crashed", countdown label truncation
 
 ### Previous Versions
 #### v1.5
@@ -306,4 +308,4 @@ This application was created with love for The Major BBS community. The Major BB
 
 ---
 
-**MBBS Launcher v1.55** | Created with Love in Iowa | © 2026 Mark Laudenbach
+**MBBS Launcher v1.70** | Created with Love in Iowa | © 2026 Mark Laudenbach
