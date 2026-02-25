@@ -11,9 +11,9 @@
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
 
     <!-- Version Information -->
-    <Version>1.55.0</Version>
-    <AssemblyVersion>1.55.0.0</AssemblyVersion>
-    <FileVersion>1.55.0.0</FileVersion>
+    <Version>1.70.0</Version>
+    <AssemblyVersion>1.70.0.0</AssemblyVersion>
+    <FileVersion>1.70.0.0</FileVersion>
     <Product>MBBS Launcher</Product>
     <Company>Mark Laudenbach</Company>
     <Copyright>Copyright © 2026 Mark Laudenbach - Created with Love in Iowa</Copyright>

@@ -112,9 +112,6 @@ namespace MBBSLauncher.Core
                 config.SetValue("AutoLaunch", $"{program.Id}Minimized", program.LaunchMinimized.ToString().ToLower());
             }
 
-            // Add version marker
-            config.SetValue("AutoLaunch", "Version", "2.0");
-
             LogEvent($"Saved {_programs.Count} auto-launch programs to config");
         }
 

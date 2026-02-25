@@ -3,13 +3,16 @@
 // https://github.com/laudenbachm/MBBS-Launcher
 //
 // File: Forms/ConfigEditorForm.cs
-// Version: v1.5
+// Version: v1.60
 //
 // Change History:
 // 26.01.07.1 - 06:00PM - Initial creation
 // 26.01.12.1 - Added Auto-Start BBS settings and F2 Module Editor option
 // 26.01.23.1 - Added Ghost3 support settings
 // 26.02.06.1 - v1.5: Complete redesign with TabControl (5 tabs)
+// 26.02.19.1 - v1.60: Column sizing on Auto-Launch tab; Auto-Start label height fix;
+//              Advanced tab: removed duplicate GitHub URL, added Support section;
+//              LoadConfiguration: default AutoLaunchAtStartup checkbox for new installs
 
 using System;
 using System.Drawing;
@@ -445,7 +448,7 @@ namespace MBBSLauncher.Forms
             {
                 Text = "ℹ When enabled, the BBS will start automatically after the delay.\n  Press any key or click to cancel during countdown.",
                 Location = new Point(20, y),
-                Size = new Size(650, 35),
+                Size = new Size(650, 45),
                 Font = new Font("Segoe UI", 9),
                 ForeColor = Color.FromArgb(100, 100, 100)
             };
@@ -467,37 +470,38 @@ namespace MBBSLauncher.Forms
             var lblDescription = new Label
             {
                 Text = "Configure programs to automatically launch after the BBS starts.\n" +
-                       "Each program launches independently based on its delay setting.\n" +
-                       "NOTE: This replaces the Ghost3 auto-launch feature from v1.20.",
+                       "Each program launches independently based on its delay setting.",
                 Location = new Point(20, y),
-                Size = new Size(730, 60),
+                Size = new Size(660, 40),
                 Font = new Font("Segoe UI", 9),
                 ForeColor = Color.FromArgb(80, 80, 80)
             };
             tab.Controls.Add(lblDescription);
-            y += 70;
+            y += 50;
 
-            // DataGridView for programs list
+            // DataGridView for programs list.
+            // Width is kept to 680px so it fits within the tab page content area (~700px usable).
             var gridView = new DataGridView
             {
                 Location = new Point(20, y),
-                Size = new Size(730, 280),
+                Size = new Size(680, 280),
                 AllowUserToAddRows = false,
                 AllowUserToDeleteRows = false,
                 SelectionMode = DataGridViewSelectionMode.FullRowSelect,
                 MultiSelect = false,
                 ReadOnly = false,
                 RowHeadersVisible = false,
-                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None
             };
 
-            // Add columns
+            // Add columns.  All small columns use explicit pixel widths; the Path column
+            // uses Fill mode so it expands to consume any remaining grid width.
             var colEnabled = new DataGridViewCheckBoxColumn
             {
                 Name = "Enabled",
                 HeaderText = "Enabled",
-                Width = 70,
-                FillWeight = 10
+                Width = 65,
+                MinimumWidth = 55
             };
             gridView.Columns.Add(colEnabled);
 
@@ -506,7 +510,8 @@ namespace MBBSLauncher.Forms
                 Name = "Name",
                 HeaderText = "Program Name",
                 ReadOnly = true,
-                FillWeight = 25
+                Width = 130,
+                MinimumWidth = 80
             };
             gridView.Columns.Add(colName);
 
@@ -515,7 +520,8 @@ namespace MBBSLauncher.Forms
                 Name = "Path",
                 HeaderText = "Executable Path",
                 ReadOnly = true,
-                FillWeight = 40
+                MinimumWidth = 100,
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
             };
             gridView.Columns.Add(colPath);
 
@@ -524,7 +530,8 @@ namespace MBBSLauncher.Forms
                 Name = "Arguments",
                 HeaderText = "Arguments",
                 ReadOnly = true,
-                FillWeight = 20
+                Width = 90,
+                MinimumWidth = 50
             };
             gridView.Columns.Add(colArgs);
 
@@ -532,9 +539,9 @@ namespace MBBSLauncher.Forms
             {
                 Name = "Delay",
                 HeaderText = "Delay (s)",
-                Width = 70,
                 ReadOnly = true,
-                FillWeight = 5
+                Width = 70,
+                MinimumWidth = 55
             };
             gridView.Columns.Add(colDelay);
 
@@ -542,8 +549,8 @@ namespace MBBSLauncher.Forms
             {
                 Name = "Minimized",
                 HeaderText = "Min.",
-                Width = 45,
-                FillWeight = 5
+                Width = 55,
+                MinimumWidth = 45
             };
             gridView.Columns.Add(colMinimized);
 
@@ -646,8 +653,7 @@ namespace MBBSLauncher.Forms
             var lblAbout = new Label
             {
                 Text = $"{Program.APP_NAME} {Program.APP_VERSION}\n" +
-                       $"Created by {Program.AUTHOR} with Love \u2764 in Iowa\n" +
-                       $"{Program.GITHUB_URL}\n\n" +
+                       $"Created by {Program.AUTHOR} with Love \u2764 in Iowa\n\n" +
                        ".NET Runtime: 8.0 (self-contained)\n" +
                        "Architecture: x86 (32-bit)\n" +
                        "Zero external dependencies!",
@@ -656,6 +662,43 @@ namespace MBBSLauncher.Forms
                 Font = new Font("Segoe UI", 9)
             };
             tab.Controls.Add(lblAbout);
+            y += 130;
+
+            // Support section
+            var lblSection3 = CreateSectionLabel("Support", y);
+            tab.Controls.Add(lblSection3);
+            y += 30;
+
+            var lblSupportInfo = new Label
+            {
+                Text = "Questions, feedback, or need help? Visit our community discussions:",
+                Location = new Point(20, y),
+                Size = new Size(650, 20),
+                Font = new Font("Segoe UI", 9)
+            };
+            tab.Controls.Add(lblSupportInfo);
+            y += 22;
+
+            var supportLink = new LinkLabel
+            {
+                Text = "https://github.com/laudenbachm/MBBS-Launcher/discussions",
+                Location = new Point(20, y),
+                Size = new Size(650, 20),
+                LinkColor = Color.FromArgb(0, 102, 204)
+            };
+            supportLink.LinkClicked += (s, e) =>
+            {
+                try
+                {
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                    {
+                        FileName = "https://github.com/laudenbachm/MBBS-Launcher/discussions",
+                        UseShellExecute = true
+                    });
+                }
+                catch { }
+            };
+            tab.Controls.Add(supportLink);
         }
 
         private Label CreateSectionLabel(string text, int y)
@@ -685,7 +728,13 @@ namespace MBBSLauncher.Forms
                 _bbsPathTextBox.Text = _config.GetValue("Paths", "BBSPath");
 
             if (_autoLaunchCheckBox != null)
-                _autoLaunchCheckBox.Checked = IsInWindowsStartup();
+            {
+                // Show checked if already in Windows startup, OR if the config default says to enable it.
+                // The latter covers new installs where the registry entry hasn't been written yet.
+                bool inStartup = IsInWindowsStartup();
+                bool configDefault = _config.GetValue("Settings", "AutoLaunchAtStartup", "false") == "true";
+                _autoLaunchCheckBox.Checked = inStartup || configDefault;
+            }
 
             if (_showTrayIconCheckBox != null)
                 _showTrayIconCheckBox.Checked = _config.GetValue("Settings", "ShowTrayIcon", "true") == "true";

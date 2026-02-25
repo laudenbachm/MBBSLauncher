@@ -3,11 +3,12 @@
 // https://github.com/laudenbachm/MBBS-Launcher
 //
 // File: Forms/HelpForm.cs
-// Version: v1.20
+// Version: v1.60
 //
 // Change History:
 // 26.01.12.1 - Initial creation
 // 26.01.23.1 - Updated for v1.20 - Added Ghost3 info, increased font size
+// 26.02.19.1 - Dynamic version string in help content header (no more hardcoded version)
 
 using System;
 using System.Drawing;
@@ -90,9 +91,9 @@ namespace MBBSLauncher.Forms
 
         private void LoadHelpContent()
         {
-            string helpContent = @"
+            string helpContent = $@"
 ================================================================================
-                    MBBS LAUNCHER v1.20 - HELP & DOCUMENTATION
+                    MBBS LAUNCHER {Program.APP_VERSION} - HELP & DOCUMENTATION
 ================================================================================
 
   Created by Mark Laudenbach with Love in Iowa

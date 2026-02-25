@@ -3,7 +3,7 @@
 // https://github.com/laudenbachm/MBBS-Launcher
 //
 // File: Forms/MainForm.cs
-// Version: v1.6
+// Version: v1.60
 //
 // Change History:
 // 26.01.07.1 - 06:00PM - Initial creation
@@ -15,6 +15,9 @@
 // 26.01.23.1 - Added Ghost3 auto-launch support with countdown
 // 26.02.07.1 - v1.5 - Added AutoLaunchManager integration for multi-program auto-launch
 // 26.02.11.1 - v1.6 - Administrator privileges now required via app.manifest
+// 26.02.19.1 - v1.60 - Neutral wording for BBS stop tray notification
+// 26.02.19.2 - v1.70 - Fix paint error on close: Bitmap copy prevents stream-disposal crash
+// 26.02.19.3 - v1.70 - Red heart painted in Windows title bar via WM_NCPAINT
 
 using System;
 using System.Drawing;
@@ -60,7 +63,7 @@ namespace MBBSLauncher.Forms
         private Core.AutoLaunchManager? _autoLaunchManager;
         private System.Collections.Generic.Dictionary<string, int> _autoLaunchCountdowns = new System.Collections.Generic.Dictionary<string, int>();
 
-        // App Manager (v1.6 Beta feature)
+        // App Manager
         private AppManagerForm? _appManagerForm;
 
         // Track window state for restore detection
@@ -163,7 +166,7 @@ namespace MBBSLauncher.Forms
             _autoLaunchManager.ProgramLaunched += AutoLaunchManager_ProgramLaunched;
             _autoLaunchManager.AllLaunchesCancelled += AutoLaunchManager_AllLaunchesCancelled;
 
-            // Initialize App Manager (v1.6 Beta)
+            // Initialize App Manager
             _appManagerForm = new AppManagerForm(_autoLaunchManager, _config);
             _appManagerForm.BBSCrashed += AppManager_BBSCrashed;
 
@@ -197,7 +200,7 @@ namespace MBBSLauncher.Forms
             _bringToFrontMenuItem = new ToolStripMenuItem("Bring Program to Front", null, TrayMenu_BringToFront);
             _bringToFrontMenuItem.Visible = false; // Hidden by default, shown when program is running
 
-            _appManagerMenuItem = new ToolStripMenuItem("App Manager (Beta)", null, TrayMenu_ShowAppManager);
+            _appManagerMenuItem = new ToolStripMenuItem("App Manager", null, TrayMenu_ShowAppManager);
 
             _configMenuItem = new ToolStripMenuItem("Configuration (F12)", null, TrayMenu_OpenConfig);
 
@@ -260,18 +263,31 @@ namespace MBBSLauncher.Forms
 
         private void TrayMenu_BringToFront(object? sender, EventArgs e)
         {
-            if (_runningProcess != null && !_runningProcess.HasExited)
+            System.Diagnostics.Process? target = null;
+
+            // For the BBS, always look up wgserver fresh — the tracked _runningProcess
+            // may be the wgsappgo launcher which has already exited, or its handle may be stale.
+            if (ProcessHelper.IsWGServerRunning())
             {
-                ProcessHelper.BringToForeground(_runningProcess);
+                target = ProcessHelper.GetProcess("wgserver");
             }
-            else if (!string.IsNullOrEmpty(_runningProgramName))
+
+            // For non-BBS programs (or if wgserver wasn't found), use the tracked process.
+            if (target == null && _runningProcess != null)
             {
-                // Try to find process by name (for wgserver spawned by wgsappgo)
-                var process = ProcessHelper.GetProcess("wgserver");
-                if (process != null)
+                try
                 {
-                    ProcessHelper.BringToForeground(process);
+                    _runningProcess.Refresh(); // ensure window handle is current
+                    if (!_runningProcess.HasExited)
+                        target = _runningProcess;
                 }
+                catch { }
+            }
+
+            if (target != null)
+            {
+                target.Refresh(); // always refresh before reading MainWindowHandle
+                ProcessHelper.BringToForeground(target);
             }
         }
 
@@ -387,7 +403,13 @@ namespace MBBSLauncher.Forms
                 {
                     if (stream != null)
                     {
-                        _backgroundImage = Image.FromStream(stream);
+                        // Use Bitmap copy so the image doesn't hold a reference to the
+                        // now-disposed stream — prevents ArgumentException in the Paint
+                        // handler when GDI+ accesses image metadata after close.
+                        using (var temp = Image.FromStream(stream))
+                        {
+                            _backgroundImage = new Bitmap(temp);
+                        }
                         return;
                     }
                 }
@@ -526,8 +548,8 @@ namespace MBBSLauncher.Forms
             {
                 _trayIcon.ShowBalloonTip(
                     5000,
-                    "BBS Crashed",
-                    "The Major BBS has stopped unexpectedly. Main window restored.",
+                    "BBS has stopped.",
+                    "The Major BBS has stopped. Main window restored.",
                     ToolTipIcon.Warning);
             }
         }
@@ -1445,7 +1467,7 @@ namespace MBBSLauncher.Forms
                         // Start auto-launch programs (v1.5 feature)
                         _autoLaunchManager?.StartAllLaunches();
 
-                        // Show App Manager if configured (v1.6 Beta)
+                        // Show App Manager if configured
                         bool autoShowAppManager = _config.GetBool("AppManager", "AutoShow", true);
                         if (autoShowAppManager && _appManagerForm != null)
                         {

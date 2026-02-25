@@ -3,10 +3,12 @@
 // https://github.com/laudenbachm/MBBS-Launcher
 //
 // File: Models/ManagedProgram.cs
-// Version: v1.6
+// Version: v1.60
 //
 // Change History:
 // 26.02.11.1 - Initial creation for App Manager (v1.6 Beta)
+// 26.02.19.1 - v1.60 - Neutral status text: "⚠ Stopped" replaces "⚠ CRASHED"
+// 26.02.19.2 - v1.70 - Shorten Pending text: emoji caused font-fallback overflow in status label
 
 using System;
 using System.IO;
@@ -85,10 +87,10 @@ namespace MBBSLauncher.Models
         {
             return Status switch
             {
-                ProgramStatus.Running => "✓ Running",
-                ProgramStatus.Stopped => "⨯ Stopped",
-                ProgramStatus.Crashed => "⚠ CRASHED",
-                ProgramStatus.Pending => $"⏱ Launch: {FormatTime(SecondsRemaining)}",
+                ProgramStatus.Running => "Running",
+                ProgramStatus.Stopped => "Stopped",
+                ProgramStatus.Crashed => "Crashed",
+                ProgramStatus.Pending => $"Launch {FormatTime(SecondsRemaining)}",
                 _ => "Unknown"
             };
         }
@@ -121,6 +123,6 @@ namespace MBBSLauncher.Models
         Stopped,    // Not running
         Running,    // Currently running
         Pending,    // Countdown active, will launch soon
-        Crashed     // Was running, now stopped unexpectedly
+        Crashed     // Was running, now stopped
     }
 }

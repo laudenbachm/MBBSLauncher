@@ -3,10 +3,14 @@
 // https://github.com/laudenbachm/MBBS-Launcher
 //
 // File: Core/ConfigMigration.cs
-// Version: v1.5
+// Version: v1.70
 //
 // Change History:
 // 26.02.06.1 - Initial creation for v1.5
+// 26.02.19.2 - v1.70 - Moved version marker from [AutoLaunch].Version to [Settings].ConfigVersion
+//                       Version written dynamically from Program.APP_VERSION (no more hardcoded "1.5")
+//                       NeedsMigration() checks both old and new marker locations for compatibility
+//                       Added EnsureVersionMarker() to silently upgrade old-style markers on launch
 
 using System;
 using System.Collections.Generic;
@@ -16,38 +20,78 @@ using System.Windows.Forms;
 namespace MBBSLauncher.Core
 {
     /// <summary>
-    /// Handles migration of v1.20 configuration to v1.5 format.
+    /// Handles migration of v1.20 configuration to current format.
+    /// Version marker is stored in [Settings].ConfigVersion.
     /// </summary>
     public static class ConfigMigration
     {
         /// <summary>
-        /// Checks if the current configuration needs migration from v1.20 to v1.5.
+        /// Checks if the current configuration needs migration from v1.20.
+        /// Returns true ONLY for genuine v1.20 configs (no version marker of any kind).
         /// </summary>
         public static bool NeedsMigration()
         {
             string iniPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MBBSLauncher.ini");
 
             if (!File.Exists(iniPath))
-                return false; // No config file - first run
+                return false; // No config file — fresh install, not a migration
 
             try
             {
                 var config = new ConfigManager();
 
-                // v1.5 configs have a Version marker in [AutoLaunch] section
-                string version = config.GetValue("AutoLaunch", "Version");
+                // New-style marker (v1.70+): [Settings].ConfigVersion
+                string newMarker = config.GetValue("Settings", "ConfigVersion");
+                if (!string.IsNullOrEmpty(newMarker))
+                    return false; // Already current
 
-                // If version is empty, this is v1.20 or earlier
-                return string.IsNullOrEmpty(version);
+                // Old-style marker (v1.5–v1.60): [AutoLaunch].Version
+                string oldMarker = config.GetValue("AutoLaunch", "Version");
+                if (!string.IsNullOrEmpty(oldMarker))
+                    return false; // Already migrated from v1.20, just needs marker upgrade
+
+                // No marker at all — genuine v1.20 config
+                return true;
             }
             catch
             {
-                return false; // If we can't load config, assume no migration needed
+                return false; // If config can't be loaded, don't block startup
             }
         }
 
         /// <summary>
-        /// Migrates v1.20 configuration to v1.5 format.
+        /// Ensures the new-style [Settings].ConfigVersion marker is written.
+        /// Called on every startup when migration is not needed, so existing installs
+        /// that had the old [AutoLaunch].Version marker get silently upgraded.
+        /// </summary>
+        public static void EnsureVersionMarker()
+        {
+            string iniPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MBBSLauncher.ini");
+
+            if (!File.Exists(iniPath))
+                return;
+
+            try
+            {
+                var config = new ConfigManager();
+
+                string currentMarker = config.GetValue("Settings", "ConfigVersion");
+                if (string.IsNullOrEmpty(currentMarker))
+                {
+                    // Write new-style marker and clean up old one
+                    config.SetValue("Settings", "ConfigVersion", Program.APP_VERSION);
+                    config.RemoveValue("AutoLaunch", "Version");
+                    config.SaveConfig();
+                }
+            }
+            catch
+            {
+                // Non-critical — don't block startup if this fails
+            }
+        }
+
+        /// <summary>
+        /// Migrates v1.20 configuration to current format.
         /// Creates a backup before migration.
         /// </summary>
         public static MigrationResult MigrateV120ToV20()
@@ -65,7 +109,7 @@ namespace MBBSLauncher.Core
                 // 2. Load v1.20 config
                 var v1Config = new ConfigManager();
 
-                // 3. Create new v1.5 config (in memory)
+                // 3. Create new config (in memory)
                 var v2Config = new ConfigManager();
 
                 // 4. Migrate all sections
@@ -80,11 +124,11 @@ namespace MBBSLauncher.Core
                 // 6. Add version marker
                 AddVersionMarker(v2Config, result);
 
-                // 7. Save v1.5 config
+                // 7. Save new config
                 v2Config.SaveConfig();
 
                 result.Success = true;
-                Program.LogError("Migration", new Exception("Configuration migrated successfully from v1.20 to v1.5"));
+                Program.LogError("Migration", new Exception($"Configuration migrated successfully from v1.20 to {Program.APP_VERSION}"));
 
                 return result;
             }
@@ -226,8 +270,9 @@ namespace MBBSLauncher.Core
 
         private static void AddVersionMarker(ConfigManager v2, MigrationResult result)
         {
-            v2.SetValue("AutoLaunch", "Version", "1.5");
-            result.MigratedSettings.Add("Version marker: 1.5");
+            // Write to [Settings].ConfigVersion using current app version — never hardcoded
+            v2.SetValue("Settings", "ConfigVersion", Program.APP_VERSION);
+            result.MigratedSettings.Add($"Version marker: {Program.APP_VERSION}");
         }
     }
 

@@ -3,7 +3,7 @@
 // https://github.com/laudenbachm/MBBS-Launcher
 //
 // File: ConfigManager.cs
-// Version: v1.6
+// Version: v1.60
 //
 // Change History:
 // 26.01.07.1 - 06:00PM - Initial creation
@@ -12,6 +12,8 @@
 // 26.01.23.1 - Added Ghost3 support settings
 // 26.02.07.1 - v1.5: Added multiple auto-launch programs support, using Models namespace
 // 26.02.11.1 - v1.6: Added GetBool/GetInt helper methods for App Manager
+// 26.02.19.1 - v1.60: Default config: AutoLaunchAtStartup and ShowTrayIcon enabled by default
+// 26.02.19.2 - v1.70: Removed Ghost3 entries from default Settings (replaced by AutoLaunch in v1.5)
 
 using System;
 using System.Collections.Generic;
@@ -155,16 +157,14 @@ namespace MBBSLauncher
             // Settings section
             _configData["Settings"] = new Dictionary<string, string>
             {
-                { "AutoLaunchAtStartup", "false" },
+                { "ConfigVersion", Program.APP_VERSION }, // Written dynamically — never hardcoded
+                { "AutoLaunchAtStartup", "true" },  // Enabled by default for new installs
                 { "MinimizeToTray", "true" },
-                { "ShowTrayIcon", "true" },
+                { "ShowTrayIcon", "true" },          // Enabled by default for new installs
                 { "EscMinimizesToTray", "false" }, // ESC minimizes to taskbar by default, true = minimize to tray
                 { "AutoStartBBS", "false" },       // OFF by default - auto-launch BBS when launcher starts
                 { "AutoStartDelay", "5" },         // Seconds to wait before auto-starting (allows cancel)
-                { "QuietMode", "false" },          // Minimize to tray after auto-start
-                { "Ghost3Enabled", "false" },      // OFF by default - auto-launch Ghost3 after BBS starts
-                { "Ghost3Path", @"C:\Ghost3\Ghost3.exe" }, // Default Ghost3 installation path
-                { "Ghost3Delay", "60" }            // Seconds to wait after BBS starts before launching Ghost3
+                { "QuietMode", "false" }           // Minimize to tray after auto-start
             };
 
             // Programs section
@@ -232,6 +232,15 @@ namespace MBBSLauncher
                 _configData[section] = new Dictionary<string, string>();
 
             _configData[section][key] = value;
+        }
+
+        /// <summary>
+        /// Removes a key from a section (used to clean up legacy keys).
+        /// </summary>
+        public void RemoveValue(string section, string key)
+        {
+            if (_configData.ContainsKey(section))
+                _configData[section].Remove(key);
         }
 
         /// <summary>
