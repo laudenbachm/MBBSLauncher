@@ -1,4 +1,4 @@
-// MBBS Launcher - Auto Restart Settings (Disabled in v1.5)
+// MBBSLauncher - Auto Restart Settings (Disabled in v1.5)
 namespace MBBSLauncher.Models
 {
     public class AutoRestartSettings

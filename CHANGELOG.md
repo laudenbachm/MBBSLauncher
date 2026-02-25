@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to MBBS Launcher will be documented in this file.
+All notable changes to MBBSLauncher will be documented in this file.
 
 The format for change tracking: `YY.MM.DD.X - HH:MMAM/PM`
 - YY = Year (26 = 2026)
@@ -15,15 +15,15 @@ The format for change tracking: `YY.MM.DD.X - HH:MMAM/PM`
 **Executable Renamed to MBBSLauncher.exe**
 
 #### Changed
-- **Output executable renamed from `MBBS Launcher.exe` to `MBBSLauncher.exe`**
+- **Output executable renamed from `MBBSLauncher.exe` to `MBBSLauncher.exe`**
   - GitHub's release asset API converts spaces to dots, resulting in `MBBS.Launcher.exe` on downloads
-  - Users updating from earlier versions would end up with both `MBBS Launcher.exe` and `MBBS.Launcher.exe` with no clear indicator which was current
+  - Users updating from earlier versions would end up with both `MBBSLauncher.exe` and `MBBS.Launcher.exe` with no clear indicator which was current
   - Removing the space eliminates the ambiguity — `MBBSLauncher.exe` downloads and stays exactly as named
-  - The app display name ("MBBS Launcher"), window title, and INI filename (`MBBSLauncher.ini`) are unchanged
-  - Windows startup registry entry key name ("MBBS Launcher") is unchanged
+  - The app display name ("MBBSLauncher"), window title, and INI filename (`MBBSLauncher.ini`) are unchanged
+  - Windows startup registry entry key name ("MBBSLauncher") is unchanged
 
 #### Technical Details
-- `MBBSLauncher.csproj`: `<AssemblyName>MBBS Launcher</AssemblyName>` → `<AssemblyName>MBBSLauncher</AssemblyName>`
+- `MBBSLauncher.csproj`: `<AssemblyName>MBBSLauncher</AssemblyName>` → `<AssemblyName>MBBSLauncher</AssemblyName>`
 
 ---
 
@@ -168,7 +168,7 @@ The format for change tracking: `YY.MM.DD.X - HH:MMAM/PM`
 - **Advanced tab cleanup**
   - Removed duplicate GitHub URL from "About" section (already shown in top header of config window)
 - **Improved default configuration for new installs**
-  - "Launch MBBS Launcher automatically at Windows start" — enabled by default
+  - "Launch MBBSLauncher automatically at Windows start" — enabled by default
   - "Show Icon in System Tray" — enabled by default (was already true, now explicitly documented)
   - Config editor checkbox reflects INI default for new installs where registry entry not yet written
   - Existing user configurations are not affected
@@ -193,7 +193,7 @@ The format for change tracking: `YY.MM.DD.X - HH:MMAM/PM`
   - Auto Launch now checks whether a configured application is already running on the system before attempting to launch it
   - If a matching process is found, the launch is skipped and the event is logged to `audit.log`
   - Prevents duplicate instances of auto-launch programs (e.g., Ghost3, Telnet server) from being spawned on BBS restart or re-launch
-  - Works correctly regardless of whether the program was launched by MBBS Launcher or started externally
+  - Works correctly regardless of whether the program was launched by MBBSLauncher or started externally
   - Process detection uses the executable filename (without `.exe` extension) via `Process.GetProcessesByName()`
 
 #### Technical Details
@@ -375,8 +375,8 @@ MBBSLauncher/
 │       ├── ProcessHelper.cs
 │       └── MBBSLauncher.csproj
 ├── images/
-│   ├── MBBS Launcher Screen.png
-│   └── MBBS Launcher ICON 1024x1024.png
+│   ├── MBBSLauncher Screen.png
+│   └── MBBSLauncher ICON 1024x1024.png
 ├── docs/
 ├── README.md
 ├── CHANGELOG.md
@@ -393,7 +393,7 @@ MBBSLauncher/
 
 ## Version Numbering Scheme
 
-MBBS Launcher uses the following versioning scheme:
+MBBSLauncher uses the following versioning scheme:
 - **Major.Minor** format (e.g., v1.00)
 - Major version increments for significant feature additions or breaking changes
 - Minor version increments for bug fixes and small features

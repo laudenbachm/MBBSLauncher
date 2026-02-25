@@ -1,4 +1,4 @@
-// MBBS Launcher - Main Form Designer
+// MBBSLauncher - Main Form Designer
 // Created by Mark Laudenbach with Love in Iowa
 // https://github.com/laudenbachm/MBBS-Launcher
 //
@@ -63,7 +63,7 @@ namespace MBBSLauncher.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(960, 540);
             this.Name = "MainForm";
-            this.Text = "MBBS Launcher";
+            this.Text = "MBBSLauncher";
             this.ResumeLayout(false);
         }
 

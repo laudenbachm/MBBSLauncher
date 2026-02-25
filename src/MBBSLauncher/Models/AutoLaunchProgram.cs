@@ -1,4 +1,4 @@
-// MBBS Launcher - Auto-Launch Program Model
+// MBBSLauncher - Auto-Launch Program Model
 // Created by Mark Laudenbach with Love in Iowa
 // https://github.com/laudenbachm/MBBS-Launcher
 //

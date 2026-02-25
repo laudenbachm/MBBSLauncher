@@ -1,4 +1,4 @@
-// MBBS Launcher - Configuration Editor Form Designer
+// MBBSLauncher - Configuration Editor Form Designer
 // Created by Mark Laudenbach with Love in Iowa
 // https://github.com/laudenbachm/MBBS-Launcher
 //

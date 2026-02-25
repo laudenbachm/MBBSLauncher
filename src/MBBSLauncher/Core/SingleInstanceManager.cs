@@ -1,4 +1,4 @@
-// MBBS Launcher - Single Instance Manager
+// MBBSLauncher - Single Instance Manager
 // Created by Mark Laudenbach with Love in Iowa
 // https://github.com/laudenbachm/MBBS-Launcher
 //
@@ -23,7 +23,7 @@ namespace MBBSLauncher.Core
     {
         private static Mutex? _instanceMutex;
         private const string MUTEX_NAME = "Global\\MBBSLauncher_SingleInstance_E4F2A1B9";
-        private const string WINDOW_TITLE_PREFIX = "MBBS Launcher";
+        private const string WINDOW_TITLE_PREFIX = "MBBSLauncher";
 
         #region Win32 API Imports
 
@@ -118,7 +118,7 @@ namespace MBBSLauncher.Core
 
         /// <summary>
         /// Finds the existing launcher window handle.
-        /// Searches for windows with titles starting with "MBBS Launcher".
+        /// Searches for windows with titles starting with "MBBSLauncher".
         /// </summary>
         private static IntPtr FindExistingWindow()
         {
@@ -134,8 +134,8 @@ namespace MBBSLauncher.Core
             if (hWnd != IntPtr.Zero)
                 return hWnd;
 
-            // Try finding any MBBS Launcher process and get its main window
-            var processes = Process.GetProcessesByName("MBBS Launcher");
+            // Try finding any MBBSLauncher process and get its main window
+            var processes = Process.GetProcessesByName("MBBSLauncher");
             if (processes.Length > 0)
             {
                 foreach (var process in processes)

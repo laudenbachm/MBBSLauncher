@@ -1,4 +1,4 @@
-// MBBS Launcher - Main Form
+// MBBSLauncher - Main Form
 // Created by Mark Laudenbach with Love in Iowa
 // https://github.com/laudenbachm/MBBS-Launcher
 //
@@ -84,7 +84,7 @@ namespace MBBSLauncher.Forms
                     {
                         var result = MessageBox.Show(
                             "WGServer is already running!\n\nWould you like to bring it to the foreground?",
-                            "MBBS Launcher",
+                            "MBBSLauncher",
                             MessageBoxButtons.YesNo,
                             MessageBoxIcon.Information);
 
@@ -218,7 +218,7 @@ namespace MBBSLauncher.Forms
 
             // Create tray icon
             _trayIcon = new NotifyIcon();
-            _trayIcon.Text = "MBBS Launcher - Idle";
+            _trayIcon.Text = "MBBSLauncher - Idle";
             _trayIcon.ContextMenuStrip = _trayMenu;
             _trayIcon.DoubleClick += TrayIcon_DoubleClick;
 
@@ -255,7 +255,7 @@ namespace MBBSLauncher.Forms
             {
                 MessageBox.Show(
                     "WGServer is already running!",
-                    "MBBS Launcher",
+                    "MBBSLauncher",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
             }
@@ -343,8 +343,8 @@ namespace MBBSLauncher.Forms
                 {
                     _trayIcon.ShowBalloonTip(
                         2000,
-                        "MBBS Launcher",
-                        "MBBS Launcher is still running in the system tray.",
+                        "MBBSLauncher",
+                        "MBBSLauncher is still running in the system tray.",
                         ToolTipIcon.Info);
                     _isFirstMinimizeToTray = false;
                 }
@@ -361,7 +361,7 @@ namespace MBBSLauncher.Forms
             if (!string.IsNullOrEmpty(programName))
             {
                 // Program is running
-                _trayIcon.Text = $"MBBS Launcher - Running: {programName}";
+                _trayIcon.Text = $"MBBSLauncher - Running: {programName}";
 
                 if (_bringToFrontMenuItem != null)
                 {
@@ -377,7 +377,7 @@ namespace MBBSLauncher.Forms
             else
             {
                 // Idle state
-                _trayIcon.Text = "MBBS Launcher - Idle";
+                _trayIcon.Text = "MBBSLauncher - Idle";
 
                 if (_bringToFrontMenuItem != null)
                 {

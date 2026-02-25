@@ -1,4 +1,4 @@
-// MBBS Launcher - App Manager Form
+// MBBSLauncher - App Manager Form
 // Created by Mark Laudenbach with Love in Iowa
 // https://github.com/laudenbachm/MBBS-Launcher
 //

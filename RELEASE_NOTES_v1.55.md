@@ -1,4 +1,4 @@
-# MBBS Launcher v1.55 Release Notes
+# MBBSLauncher v1.55 Release Notes
 
 **Release Date:** February 18, 2026
 **Version:** 1.55.0
@@ -22,7 +22,7 @@ A new floating status window shows the live state of your BBS and all auto-launc
 
 ### 🔒 Run as Administrator Required
 
-MBBS Launcher now requires administrator privileges for proper operation on modern Windows versions.
+MBBSLauncher now requires administrator privileges for proper operation on modern Windows versions.
 
 **Why This Change?**
 
@@ -36,18 +36,18 @@ A user reported that the launcher did not work correctly on Windows 11 without a
 
 ### 🔍 Auto Launch Duplicate Detection
 
-Auto Launch programs are now checked against running system processes before being started. If a configured program is already running — whether it was launched by MBBS Launcher or started externally — it will be skipped rather than launching a second instance. Skipped launches are recorded in `audit.log`. Manual menu options (1–8) are not affected by this check.
+Auto Launch programs are now checked against running system processes before being started. If a configured program is already running — whether it was launched by MBBSLauncher or started externally — it will be skipped rather than launching a second instance. Skipped launches are recorded in `audit.log`. Manual menu options (1–8) are not affected by this check.
 
 ### What You'll See on Launch
 
-When you start MBBS Launcher v1.55, Windows will show a UAC prompt:
+When you start MBBSLauncher v1.55, Windows will show a UAC prompt:
 
 ```
 User Account Control
 
 Do you want to allow this app to make changes to your device?
 
-MBBS Launcher
+MBBSLauncher
 Verified publisher: Mark Laudenbach
 
 [Yes] [No]
@@ -76,9 +76,9 @@ Click **Yes** to run the launcher. This is normal and required for proper operat
 
 ## Upgrade Instructions
 
-1. Download `MBBS Launcher.exe` from the releases page
+1. Download `MBBSLauncher.exe` from the releases page
 2. Extract to your existing launcher folder (overwrite old version)
-3. Run `MBBS Launcher.exe`
+3. Run `MBBSLauncher.exe`
 4. Click **Yes** when Windows prompts for administrator permission
 
 Your existing configuration (`MBBSLauncher.ini`) will be preserved. No reconfiguration needed!
@@ -126,6 +126,6 @@ See [CHANGELOG.md](CHANGELOG.md) for complete version history.
 
 ---
 
-**Thank you for using MBBS Launcher!**
+**Thank you for using MBBSLauncher!**
 
 For The Major BBS community - keeping the BBS legacy alive in 2026 and beyond.

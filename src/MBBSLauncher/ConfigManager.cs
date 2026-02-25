@@ -1,4 +1,4 @@
-// MBBS Launcher - Configuration Manager
+// MBBSLauncher - Configuration Manager
 // Created by Mark Laudenbach with Love in Iowa
 // https://github.com/laudenbachm/MBBS-Launcher
 //
@@ -25,7 +25,7 @@ using MBBSLauncher.Models;
 namespace MBBSLauncher
 {
     /// <summary>
-    /// Manages INI configuration file for MBBS Launcher
+    /// Manages INI configuration file for MBBSLauncher
     /// </summary>
     public class ConfigManager
     {
@@ -106,7 +106,7 @@ namespace MBBSLauncher
             try
             {
                 StringBuilder sb = new StringBuilder();
-                sb.AppendLine("; MBBS Launcher Configuration File");
+                sb.AppendLine("; MBBSLauncher Configuration File");
                 sb.AppendLine($"; Generated: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
                 sb.AppendLine();
 

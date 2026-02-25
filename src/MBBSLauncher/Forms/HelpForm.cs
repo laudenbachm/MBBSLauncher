@@ -1,4 +1,4 @@
-// MBBS Launcher - Help Form
+// MBBSLauncher - Help Form
 // Created by Mark Laudenbach with Love in Iowa
 // https://github.com/laudenbachm/MBBS-Launcher
 //
@@ -103,7 +103,7 @@ namespace MBBSLauncher.Forms
                               QUICK START
 --------------------------------------------------------------------------------
 
-  MBBS Launcher provides a convenient graphical interface for managing and
+  MBBSLauncher provides a convenient graphical interface for managing and
   launching The Major BBS Version 10 system.
 
   Simply press the number key (0-9) corresponding to the option you want,
@@ -249,7 +249,7 @@ namespace MBBSLauncher.Forms
 
 --------------------------------------------------------------------------------
 
-  Thank you for using MBBS Launcher!
+  Thank you for using MBBSLauncher!
 
   For support, questions, or feedback, please visit our Discord or GitHub.
 

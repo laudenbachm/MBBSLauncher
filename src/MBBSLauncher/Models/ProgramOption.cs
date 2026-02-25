@@ -1,4 +1,4 @@
-// MBBS Launcher - Program Option Model
+// MBBSLauncher - Program Option Model
 // Created by Mark Laudenbach with Love in Iowa
 // https://github.com/laudenbachm/MBBS-Launcher
 //

@@ -1,4 +1,4 @@
-// MBBS Launcher - Restart Manager (Disabled in v1.5)
+// MBBSLauncher - Restart Manager (Disabled in v1.5)
 using System;
 using MBBSLauncher.Models;
 

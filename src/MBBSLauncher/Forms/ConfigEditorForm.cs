@@ -1,4 +1,4 @@
-// MBBS Launcher - Configuration Editor Form (v1.5 Redesign)
+// MBBSLauncher - Configuration Editor Form (v1.5 Redesign)
 // Created by Mark Laudenbach with Love in Iowa
 // https://github.com/laudenbachm/MBBS-Launcher
 //
@@ -184,7 +184,7 @@ namespace MBBSLauncher.Forms
 
             _autoLaunchCheckBox = new CheckBox
             {
-                Text = "Launch MBBS Launcher automatically at Windows startup",
+                Text = "Launch MBBSLauncher automatically at Windows startup",
                 Location = new Point(20, y),
                 Size = new Size(600, 25)
             };
@@ -922,7 +922,7 @@ namespace MBBSLauncher.Forms
                 {
                     string? exePath = System.Diagnostics.Process.GetCurrentProcess().MainModule?.FileName;
                     if (!string.IsNullOrEmpty(exePath))
-                        key.SetValue("MBBS Launcher", $"\"{exePath}\"");
+                        key.SetValue("MBBSLauncher", $"\"{exePath}\"");
                 }
             }
         }
@@ -932,8 +932,8 @@ namespace MBBSLauncher.Forms
             using (var key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(
                 @"Software\Microsoft\Windows\CurrentVersion\Run", true))
             {
-                if (key != null && key.GetValue("MBBS Launcher") != null)
-                    key.DeleteValue("MBBS Launcher", false);
+                if (key != null && key.GetValue("MBBSLauncher") != null)
+                    key.DeleteValue("MBBSLauncher", false);
             }
         }
 
@@ -944,7 +944,7 @@ namespace MBBSLauncher.Forms
                 using (var key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(
                     @"Software\Microsoft\Windows\CurrentVersion\Run", false))
                 {
-                    return key?.GetValue("MBBS Launcher") != null;
+                    return key?.GetValue("MBBSLauncher") != null;
                 }
             }
             catch

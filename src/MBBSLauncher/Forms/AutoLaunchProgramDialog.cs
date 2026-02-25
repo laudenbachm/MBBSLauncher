@@ -1,4 +1,4 @@
-// MBBS Launcher - Auto-Launch Program Dialog
+// MBBSLauncher - Auto-Launch Program Dialog
 // Created by Mark Laudenbach with Love in Iowa
 // https://github.com/laudenbachm/MBBS-Launcher
 //

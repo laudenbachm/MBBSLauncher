@@ -1,4 +1,4 @@
-// MBBS Launcher - Dialog Closer (Disabled in v1.5)
+// MBBSLauncher - Dialog Closer (Disabled in v1.5)
 namespace MBBSLauncher.Core
 {
     public static class DialogCloser

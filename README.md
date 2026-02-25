@@ -76,7 +76,7 @@ Even though the single file is larger, you're actually using **less disk space o
 
 **That's it!** No .NET runtime installation needed. All dependencies are included in the single executable.
 
-> **Upgrading from v1.60 or earlier?** The executable was renamed from `MBBS Launcher.exe` to `MBBSLauncher.exe` in v1.70. You can delete the old file — your `MBBSLauncher.ini` settings are fully preserved.
+> **Upgrading from v1.60 or earlier?** The executable was renamed from `MBBSLauncher.exe` to `MBBSLauncher.exe` in v1.70. You can delete the old file — your `MBBSLauncher.ini` settings are fully preserved.
 
 ### Why Administrator Privileges?
 
@@ -163,7 +163,7 @@ Based on the classic Major BBS launcher:
 7. Offline Utilities
 8. Reports
 99. CNF 99
-0. Exit MBBS Launcher
+0. Exit MBBSLauncher
 
 ## Building from Source
 
@@ -244,7 +244,7 @@ See [CHANGELOG.md](CHANGELOG.md) for detailed version history.
 
 ### Current Version: v1.70
 - **App Manager** - Resizable floating status window with opacity slider, DPI-aware layout, and live countdown display
-- **MBBSLauncher.exe** - Executable renamed from `MBBS Launcher.exe` to avoid GitHub's space→dot conversion on release downloads
+- **MBBSLauncher.exe** - Executable renamed from `MBBSLauncher.exe` to avoid GitHub's space→dot conversion on release downloads
 - **Bug fixes** - Paint crash on close, BBS stop showing as "Crashed", countdown label truncation
 
 ### Previous Versions

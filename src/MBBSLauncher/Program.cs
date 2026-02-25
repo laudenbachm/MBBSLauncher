@@ -1,4 +1,4 @@
-// MBBS Launcher - Program Entry Point
+// MBBSLauncher - Program Entry Point
 // Created by Mark Laudenbach with Love in Iowa
 // https://github.com/laudenbachm/MBBS-Launcher
 //
@@ -27,7 +27,7 @@ namespace MBBSLauncher
     internal static class Program
     {
         public const string APP_VERSION = "v1.70";
-        public const string APP_NAME = "MBBS Launcher";
+        public const string APP_NAME = "MBBSLauncher";
         public const string AUTHOR = "Mark Laudenbach";
         public const string TAGLINE = "Created with Love in Iowa";
         public const string GITHUB_URL = "https://github.com/laudenbachm/MBBS-Launcher";
@@ -51,7 +51,7 @@ namespace MBBSLauncher
                 {
                     // Successfully restored existing instance
                     MessageBox.Show(
-                        "MBBS Launcher is already running.\n\nThe existing window has been restored.",
+                        "MBBSLauncher is already running.\n\nThe existing window has been restored.",
                         "Already Running",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
@@ -60,7 +60,7 @@ namespace MBBSLauncher
                 {
                     // Could not restore, but another instance exists
                     MessageBox.Show(
-                        "MBBS Launcher is already running.\n\nCould not restore the existing window - check your system tray.",
+                        "MBBSLauncher is already running.\n\nCould not restore the existing window - check your system tray.",
                         "Already Running",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
@@ -81,7 +81,7 @@ namespace MBBSLauncher
                 {
                     var dialogResult = MessageBox.Show(
                         "Configuration Upgrade Required\n\n" +
-                        "MBBS Launcher v1.20 configuration detected.\n\n" +
+                        "MBBSLauncher v1.20 configuration detected.\n\n" +
                         $"Your settings will be upgraded to {APP_VERSION} format.\n" +
                         "• All existing settings will be preserved\n" +
                         "• A backup will be created\n" +
@@ -129,7 +129,7 @@ namespace MBBSLauncher
                         // User cancelled migration
                         MessageBox.Show(
                             "Configuration upgrade cancelled.\n\n" +
-                            "Please use MBBS Launcher v1.20 with this configuration.",
+                            "Please use MBBSLauncher v1.20 with this configuration.",
                             "Upgrade Cancelled",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Warning);
@@ -152,7 +152,7 @@ namespace MBBSLauncher
                 LogError("Main", ex);
                 MessageBox.Show(
                     $"A fatal error occurred:\n\n{ex.Message}\n\n{ex.StackTrace}\n\nCheck audit.log for details.",
-                    "MBBS Launcher - Fatal Error",
+                    "MBBSLauncher - Fatal Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
@@ -168,7 +168,7 @@ namespace MBBSLauncher
             LogError("ThreadException", e.Exception);
             MessageBox.Show(
                 $"An error occurred:\n\n{e.Exception.Message}\n\nCheck audit.log for details.",
-                "MBBS Launcher - Error",
+                "MBBSLauncher - Error",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
         }
@@ -180,7 +180,7 @@ namespace MBBSLauncher
                 LogError("UnhandledException", ex);
                 MessageBox.Show(
                     $"An unhandled error occurred:\n\n{ex.Message}\n\nCheck audit.log for details.",
-                    "MBBS Launcher - Unhandled Error",
+                    "MBBSLauncher - Unhandled Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
